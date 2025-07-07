@@ -58,7 +58,7 @@ body {
     list-style: none;
     padding: 0;
   }
-  
+
   .low {
     color: green;
   }
@@ -71,4 +71,16 @@ body {
     color: red;
   }
   
-  
+  .delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}
+

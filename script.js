@@ -16,7 +16,25 @@ addTaskBtn.addEventListener('click', () => {
 
   // STEP 3: Create a new list item for the task
   const li = document.createElement('li');
-  li.textContent = `${taskText} (${priority})`;
+  // li.textContent = `${taskText} (${priority})`;
+  // Set up task text with no priority inside <span>
+const taskContent = document.createElement("span");
+taskContent.textContent = `${taskText} (${priority})`;
+
+// Create delete button
+const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "❌"; // or "Delete"
+deleteBtn.classList.add("delete-btn");
+
+// Add event listener to remove task on click
+deleteBtn.addEventListener("click", () => {
+  taskList.removeChild(li);
+});
+
+// Add everything to the list item
+li.appendChild(taskContent);
+li.appendChild(deleteBtn);
+
 
   // STEP 4: Add priority class for styling (optional)
   li.classList.add(priority);
