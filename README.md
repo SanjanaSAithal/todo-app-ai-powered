@@ -31,9 +31,7 @@ open index.html
 ### 📸 Screenshot (Day 3)
 ![Task with priorities](screenshots/day3-tasks.png)
 
-
 ## 🙌 Author
-
 **Sanjana Aithal**
 
 - [GitHub](https://github.com/SanjanaSAithal)
