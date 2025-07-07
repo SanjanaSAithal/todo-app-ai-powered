@@ -59,3 +59,16 @@ body {
     padding: 0;
   }
   
+  .low {
+    color: green;
+  }
+  
+  .medium {
+    color: orange;
+  }
+  
+  .high {
+    color: red;
+  }
+  
+  
