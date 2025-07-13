@@ -21,6 +21,9 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 3: Added JavaScript logic to add tasks with priority
 - ✅ Day 4: Added delete functionality to each task
 - ✅ Day 5: Added task completion checkbox
+- ✅ Day 6: Task Filtering
+            🔍 Added a dropdown to filter tasks by status or priority.
+            Works for Completed, Uncompleted, Low, Medium, and High priority tasks.
 
 
 ## 📦 How to Run Locally
@@ -36,6 +39,9 @@ open index.html
 ![Delete functionality to each task] (screenshots/day4.png)
 
 ![Checkbox addition, and strikethrough on completion] (screenshots/day5.png)
+
+![Day 6 Screenshot](screenshots/day6.png)
+
 
 ## 🙌 Author
 **Sanjana Aithal**

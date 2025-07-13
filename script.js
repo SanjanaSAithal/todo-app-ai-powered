@@ -35,6 +35,7 @@ checkbox.addEventListener("change", () => {
   // Set up task text with no priority inside <span>
 const taskContent = document.createElement("span");
 taskContent.textContent = `${taskText} (${priority})`;
+taskContent.classList.add(priority); // 🔥 This is the fix
 
 // Create delete button
 const deleteBtn = document.createElement("button");
@@ -51,6 +52,27 @@ li.appendChild(checkbox);      // ✅ Add checkbox first
 li.appendChild(taskContent);   // 📝 Then task text
 li.appendChild(deleteBtn);     // ❌ Then delete button
 
+const filterSelect = document.getElementById("filterSelect");
+
+filterSelect.addEventListener("change", () => {
+  const filter = filterSelect.value;
+  const allTasks = taskList.querySelectorAll("li");
+
+  allTasks.forEach((taskItem) => {
+    const isCompleted = taskItem.querySelector(".completed") !== null;
+    const priorityClass = taskItem.querySelector("span").classList.value;
+
+    taskItem.style.display = "block"; // reset first
+
+    if (filter === "completed" && !isCompleted) {
+      taskItem.style.display = "none";
+    } else if (filter === "uncompleted" && isCompleted) {
+      taskItem.style.display = "none";
+    } else if (["low", "medium", "high"].includes(filter) && !priorityClass.includes(filter)) {
+      taskItem.style.display = "none";
+    }
+  });
+});
 
   // STEP 4: Add priority class for styling (optional)
   li.classList.add(priority);
