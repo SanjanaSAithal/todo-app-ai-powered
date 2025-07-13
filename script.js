@@ -17,6 +17,21 @@ addTaskBtn.addEventListener('click', () => {
   // STEP 3: Create a new list item for the task
   const li = document.createElement('li');
   // li.textContent = `${taskText} (${priority})`;
+
+  // Create checkbox
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+checkbox.classList.add("task-checkbox");
+
+// Event: when checkbox is clicked
+checkbox.addEventListener("change", () => {
+  if (checkbox.checked) {
+    taskContent.classList.add("completed");
+  } else {
+    taskContent.classList.remove("completed");
+  }
+});
+
   // Set up task text with no priority inside <span>
 const taskContent = document.createElement("span");
 taskContent.textContent = `${taskText} (${priority})`;
@@ -32,8 +47,9 @@ deleteBtn.addEventListener("click", () => {
 });
 
 // Add everything to the list item
-li.appendChild(taskContent);
-li.appendChild(deleteBtn);
+li.appendChild(checkbox);      // ✅ Add checkbox first
+li.appendChild(taskContent);   // 📝 Then task text
+li.appendChild(deleteBtn);     // ❌ Then delete button
 
 
   // STEP 4: Add priority class for styling (optional)

@@ -84,3 +84,16 @@ body {
   color: darkred;
 }
 
+.task-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+  font-style: italic;
+}
+
+
