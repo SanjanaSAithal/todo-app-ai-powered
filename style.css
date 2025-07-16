@@ -103,5 +103,24 @@ body {
   border-radius: 8px;
 }
 
+/* 📱 Mobile Responsive Fix */
+@media (max-width: 600px) {
+  .task-input {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  #taskInput,
+  #prioritySelect,
+  #addBtn {
+    width: 100%;
+  }
+
+  #filterSelect {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
 
 
