@@ -3,13 +3,13 @@
 ## 🔧 Description
 A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and JavaScript. Users can add, manage, and organize tasks with categories and priority levels.
 
-## 🚀 Features
+##  Features
 - ✅ Users can add tasks with priority levels (Low, Medium, High)
 - Mark tasks as complete/incomplete
 - Store data with LocalStorage
 - Responsive UI
 
-## 🧠 Learning Goals
+## Learning Goals
 - Use ChatGPT to plan, build, and debug a full project
 - Understand how frontend development works
 - Use GitHub professionally as a portfolio
@@ -22,8 +22,11 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 4: Added delete functionality to each task
 - ✅ Day 5: Added task completion checkbox
 - ✅ Day 6: Task Filtering
-            🔍 Added a dropdown to filter tasks by status or priority.
-            Works for Completed, Uncompleted, Low, Medium, and High priority tasks.
+        Added a dropdown to filter tasks by status or priority.
+        Works for Completed, Uncompleted, Low, Medium, and High priority tasks.
+-✅ Day 7: Task Counter Feature
+        Added a live task counter showing how many tasks are remaining.
+        Updates automatically when tasks are added, completed, or deleted.
 
 
 ## 📦 How to Run Locally
@@ -41,6 +44,7 @@ open index.html
 ![Checkbox addition, and strikethrough on completion] (screenshots/day5.png)
 
 ![Day 6 Screenshot](screenshots/day6.png)
+![Day 7 task counter feature] (screenshots/day7.png)
 
 
 ## 🙌 Author

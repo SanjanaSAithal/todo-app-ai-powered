@@ -3,57 +3,71 @@ const taskInput = document.getElementById('taskInput');
 const prioritySelect = document.getElementById('prioritySelect');
 const addTaskBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
+const filterSelect = document.getElementById("filterSelect");
 
-// STEP 2: When button is clicked, run a function
+// STEP 2: Add Task
 addTaskBtn.addEventListener('click', () => {
-  const taskText = taskInput.value.trim(); // get text
-  const priority = prioritySelect.value;   // get selected priority
+  const taskText = taskInput.value.trim();
+  const priority = prioritySelect.value;
 
   if (taskText === "") {
     alert("Please enter a task!");
     return;
   }
 
-  // STEP 3: Create a new list item for the task
+  // Create <li>
   const li = document.createElement('li');
-  // li.textContent = `${taskText} (${priority})`;
 
   // Create checkbox
-const checkbox = document.createElement("input");
-checkbox.type = "checkbox";
-checkbox.classList.add("task-checkbox");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.classList.add("task-checkbox");
 
-// Event: when checkbox is clicked
-checkbox.addEventListener("change", () => {
-  if (checkbox.checked) {
-    taskContent.classList.add("completed");
-  } else {
-    taskContent.classList.remove("completed");
-  }
+  // Create task content span
+  const taskContent = document.createElement("span");
+  taskContent.textContent = `${taskText} (${priority})`;
+  taskContent.classList.add(priority);
+
+  // Checkbox logic (completed/uncompleted)
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      taskContent.classList.add("completed");
+    } else {
+      taskContent.classList.remove("completed");
+    }
+    updateTaskCounter(); // ✅ Update counter here
+  });
+
+  // Create delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "❌";
+  deleteBtn.classList.add("delete-btn");
+
+  // Delete button logic
+  deleteBtn.addEventListener("click", () => {
+    taskList.removeChild(li);
+    updateTaskCounter(); // ✅ Update counter here
+  });
+
+  // Add all elements to the li
+  li.appendChild(checkbox);
+  li.appendChild(taskContent);
+  li.appendChild(deleteBtn);
+
+  // Add priority class to li (optional styling)
+  li.classList.add(priority);
+
+  // Add to the DOM
+  taskList.appendChild(li);
+
+  // Clear input
+  taskInput.value = "";
+
+  // ✅ Update counter after task is added
+  updateTaskCounter();
 });
 
-  // Set up task text with no priority inside <span>
-const taskContent = document.createElement("span");
-taskContent.textContent = `${taskText} (${priority})`;
-taskContent.classList.add(priority); // 🔥 This is the fix
-
-// Create delete button
-const deleteBtn = document.createElement("button");
-deleteBtn.textContent = "❌"; // or "Delete"
-deleteBtn.classList.add("delete-btn");
-
-// Add event listener to remove task on click
-deleteBtn.addEventListener("click", () => {
-  taskList.removeChild(li);
-});
-
-// Add everything to the list item
-li.appendChild(checkbox);      // ✅ Add checkbox first
-li.appendChild(taskContent);   // 📝 Then task text
-li.appendChild(deleteBtn);     // ❌ Then delete button
-
-const filterSelect = document.getElementById("filterSelect");
-
+// STEP 3: Filter logic
 filterSelect.addEventListener("change", () => {
   const filter = filterSelect.value;
   const allTasks = taskList.querySelectorAll("li");
@@ -62,7 +76,7 @@ filterSelect.addEventListener("change", () => {
     const isCompleted = taskItem.querySelector(".completed") !== null;
     const priorityClass = taskItem.querySelector("span").classList.value;
 
-    taskItem.style.display = "block"; // reset first
+    taskItem.style.display = "block"; // Reset visibility
 
     if (filter === "completed" && !isCompleted) {
       taskItem.style.display = "none";
@@ -74,12 +88,18 @@ filterSelect.addEventListener("change", () => {
   });
 });
 
-  // STEP 4: Add priority class for styling (optional)
-  li.classList.add(priority);
+// STEP 4: Task Counter function
+function updateTaskCounter() {
+  const allTasks = taskList.querySelectorAll("li");
+  let uncompletedCount = 0;
 
-  // STEP 5: Add to the list
-  taskList.appendChild(li);
+  allTasks.forEach((task) => {
+    const taskTextSpan = task.querySelector("span");
+    if (!taskTextSpan.classList.contains("completed")) {
+      uncompletedCount++;
+    }
+  });
 
-  // STEP 6: Clear input field after adding
-  taskInput.value = "";
-});
+  document.getElementById("taskCounter").textContent = `${uncompletedCount} task${uncompletedCount !== 1 ? 's' : ''} remaining`;
+}
+
