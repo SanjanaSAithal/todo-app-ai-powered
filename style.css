@@ -17,9 +17,6 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center inside content */
 }
 
 h1 {
@@ -32,13 +29,9 @@ h1 {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
-  justify-content: center; /* Make button stay in line or centered on wrap */
 }
 
-input,
-select,
-button {
+input, select, button {
   padding: 10px;
   font-size: 16px;
   border-radius: 8px;
@@ -47,7 +40,6 @@ button {
 
 #taskInput {
   flex: 1;
-  min-width: 200px;
 }
 
 button {
@@ -65,7 +57,6 @@ button:hover {
 #taskList {
   list-style: none;
   padding: 0;
-  width: 100%; /* Ensure full width for list items */
 }
 
 .low {
@@ -110,15 +101,14 @@ button:hover {
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 8px;
-  width: 100%; /* Make filter full width */
+  width: 100%;
 }
 
 /* 📱 Mobile Responsive Fix */
 @media (max-width: 600px) {
   .task-input {
     flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
+    gap: 10px;
   }
 
   #taskInput,
@@ -129,6 +119,5 @@ button:hover {
 
   #filterSelect {
     width: 100%;
-    margin-top: 1rem;
   }
 }
