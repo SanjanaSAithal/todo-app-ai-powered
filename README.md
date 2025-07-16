@@ -22,12 +22,8 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 4: Added delete functionality to each task
 - ✅ Day 5: Added task completion checkbox
 - ✅ Day 6: Task Filtering
-        Added a dropdown to filter tasks by status or priority.
-        Works for Completed, Uncompleted, Low, Medium, and High priority tasks.
--✅ Day 7: Task Counter Feature
-        Added a live task counter showing how many tasks are remaining.
-        Updates automatically when tasks are added, completed, or deleted.
-
+- ✅ Day 7: Task Counter Feature
+- ✅ Day 8: Local Storage 
 
 ## 📦 How to Run Locally
 ```bash
