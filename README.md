@@ -1,5 +1,7 @@
 # AI-Powered To-Do List App
 
+## [Live Demo] (https://sanjanasaithal.github.io/todo-app-ai-powered/) 
+
 ## 🔧 Description
 A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and JavaScript. Users can add, manage, and organize tasks with categories and priority levels.
 
