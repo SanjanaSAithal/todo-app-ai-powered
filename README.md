@@ -26,6 +26,7 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 6: Task Filtering
 - ✅ Day 7: Task Counter Feature
 - ✅ Day 8: Local Storage 
+- ✅ Day 9: Trash Area and Restorability
 
 ## 📦 How to Run Locally
 ```bash
@@ -42,8 +43,10 @@ open index.html
 ![Checkbox addition, and strikethrough on completion] (screenshots/day5.png)
 
 ![Day 6 Screenshot](screenshots/day6.png)
+
 ![Day 7 task counter feature] (screenshots/day7.png)
 
+![Day 8 trash area feature] (screenshots/day9.png)
 
 ## 🙌 Author
 **Sanjana Aithal**
