@@ -104,6 +104,28 @@ button:hover {
   width: 100%;
 }
 
+#trashList {
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+  border: 1px dashed #ccc;
+  background-color: #fefefe;
+}
+
+.restore-btn {
+  background: none;
+  border: none;
+  color: #007BFF; /* or any color you like */
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.restore-btn:hover {
+  color: #0056b3;
+}
+
+
 .task-list-container {
   max-height: 300px; /* You can adjust this height as needed */
   overflow-y: auto;
