@@ -4,6 +4,7 @@ const addTaskBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
 const filterSelect = document.getElementById("filterSelect");
 const trashList = document.getElementById("trashList");
+const clearTrashBtn = document.getElementById("clearTrashBtn"); // <-- NEW
 
 addTaskBtn.addEventListener('click', () => {
   const taskText = taskInput.value.trim();
@@ -19,7 +20,7 @@ addTaskBtn.addEventListener('click', () => {
 
   taskInput.value = "";
   updateTaskCounter();
-  saveTasksToLocalStorage();
+  saveState();
 });
 
 filterSelect.addEventListener("change", () => {
@@ -57,31 +58,60 @@ function updateTaskCounter() {
     `${uncompletedCount} task${uncompletedCount !== 1 ? 's' : ''} remaining`;
 }
 
-function saveTasksToLocalStorage() {
+function saveState() {
   const tasks = [];
-  const allTasks = taskList.querySelectorAll("li");
-
-  allTasks.forEach((task) => {
+  taskList.querySelectorAll("li").forEach((task) => {
     const text = task.querySelector("span").textContent;
     const isCompleted = task.querySelector("span").classList.contains("completed");
-    const priority = task.classList.contains("low")
-      ? "low"
-      : task.classList.contains("medium")
-        ? "medium"
-        : "high";
-
+    const priority = task.classList[0]; // Simplified priority fetching
     tasks.push({ text, isCompleted, priority });
   });
 
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  const trash = [];
+  trashList.querySelectorAll("li").forEach((task) => {
+    const text = task.querySelector("span").textContent;
+    const isCompleted = task.querySelector("span").classList.contains("completed");
+    const priority = task.classList[0];
+    trash.push({ text, isCompleted, priority });
+  });
+
+  // Save the new object with both arrays
+  localStorage.setItem("appState", JSON.stringify({ tasks, trash }));
 }
 
-function loadTasksFromLocalStorage() {
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+function loadState() {
+  const state = JSON.parse(localStorage.getItem("appState")) || { tasks: [], trash: [] };
 
-  tasks.forEach(({ text, isCompleted, priority }) => {
+  // Load active tasks
+  state.tasks.forEach(({ text, isCompleted, priority }) => {
     const li = createTaskElement(text, priority, isCompleted);
     taskList.appendChild(li);
+  });
+
+  // Load trashed tasks
+  state.trash.forEach(({ text, isCompleted, priority }) => {
+    // We create the element, but then manually move it to trash
+    const li = createTaskElement(text, priority, isCompleted);
+    
+    // Simulate the 'delete' click to move it to trash correctly
+    const deleteBtn = li.querySelector(".delete-btn");
+    const restoreBtn = document.createElement("button");
+    restoreBtn.textContent = "🔁";
+    restoreBtn.classList.add("restore-btn");
+
+    li.removeChild(deleteBtn);
+    li.appendChild(restoreBtn);
+    trashList.appendChild(li);
+
+    // Re-attach the restore functionality
+    restoreBtn.addEventListener("click", () => {
+      trashList.removeChild(li);
+      li.removeChild(restoreBtn);
+      li.appendChild(deleteBtn);
+      taskList.insertBefore(li, taskList.firstChild);
+      updateTaskCounter();
+      saveState(); // <-- Use new save function
+    });
   });
 
   updateTaskCounter();
@@ -110,7 +140,7 @@ function createTaskElement(text, priority, isCompleted) {
       taskContent.classList.remove("completed");
     }
     updateTaskCounter();
-    saveTasksToLocalStorage();
+    saveState();
   });
 
   const deleteBtn = document.createElement("button");
@@ -135,11 +165,11 @@ function createTaskElement(text, priority, isCompleted) {
       li.appendChild(deleteBtn);
       taskList.insertBefore(li, taskList.firstChild);
       updateTaskCounter();
-      saveTasksToLocalStorage();
+      saveState();
     });
 
     updateTaskCounter();
-    saveTasksToLocalStorage();
+    saveState();
   });
 
   li.appendChild(checkbox);
@@ -150,4 +180,9 @@ function createTaskElement(text, priority, isCompleted) {
   return li;
 }
 
-loadTasksFromLocalStorage();
+// 🧹 Clear Trash functionality
+clearTrashBtn.addEventListener("click", () => {
+  trashList.innerHTML = "";
+});
+
+loadState();

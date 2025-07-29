@@ -27,15 +27,16 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 7: Task Counter Feature
 - ✅ Day 8: Local Storage 
 - ✅ Day 9: Trash Area and Restorability
+- ✅ Day 10: Clear trash button + cleaner UI
 
 ## 📦 How to Run Locally
 ```bash
 git clone <repo-url>
 open index.html
 
-## 🖼️ Screenshots
+
 ![Day 2 UI](screenshots/day2-ui.png)
-### 📸 Screenshot (Day 3)
+
 ![Task with priorities](screenshots/day3-tasks.png)
 
 ![Delete functionality to each task] (screenshots/day4.png)
@@ -46,9 +47,11 @@ open index.html
 
 ![Day 7 task counter feature] (screenshots/day7.png)
 
-![Day 8 trash area feature] (screenshots/day9.png)
+![Day 9 trash area feature] (screenshots/day9.png)
 
-## 🙌 Author
+![Day 10 clear trash feature] (screenshots/day10.png)
+
+
 **Sanjana Aithal**
 
 - [GitHub](https://github.com/SanjanaSAithal)
