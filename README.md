@@ -28,6 +28,7 @@ A beginner-friendly, AI-guided to-do list web app built using HTML, CSS, and Jav
 - ✅ Day 8: Local Storage 
 - ✅ Day 9: Trash Area and Restorability
 - ✅ Day 10: Clear trash button + cleaner UI
+- ✅ Day 11: Editing task name
 
 ## 📦 How to Run Locally
 ```bash
@@ -50,6 +51,8 @@ open index.html
 ![Day 9 trash area feature] (screenshots/day9.png)
 
 ![Day 10 clear trash feature] (screenshots/day10.png)
+
+![Day 11 Screenshot](screenshots/day11.png)
 
 
 **Sanjana Aithal**

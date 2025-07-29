@@ -133,12 +133,54 @@ function createTaskElement(text, priority, isCompleted) {
     taskContent.classList.add("completed");
   }
 
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      taskContent.classList.add("completed");
-    } else {
-      taskContent.classList.remove("completed");
+  // --- 💡 NEW: EDIT LOGIC STARTS HERE ---
+  taskContent.addEventListener("click", () => {
+    // Don't allow editing of a completed task
+    if (taskContent.classList.contains("completed")) {
+      return; 
     }
+    
+    const editInput = document.createElement("input");
+    editInput.type = "text";
+    editInput.value = taskContent.textContent;
+    // Temporarily remove the priority class to avoid colored text in input
+    editInput.className = taskContent.className.replace(priority, "").trim();
+
+    // Replace the span with the input field
+    li.replaceChild(editInput, taskContent);
+    editInput.focus();
+
+    // Function to save the changes
+    const saveEdit = () => {
+      const newText = editInput.value.trim();
+      
+      // If the new text is not empty, update the span
+      if (newText) {
+        taskContent.textContent = newText;
+      }
+      
+      // Replace the input field back with the span
+      li.replaceChild(taskContent, editInput);
+      saveState(); // Save the entire app state
+    };
+
+    // Save when the user clicks away (blur)
+    editInput.addEventListener("blur", saveEdit);
+
+    // Save when the user presses "Enter"
+    editInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        editInput.blur(); // Trigger the blur event to save
+      } else if (e.key === "Escape") {
+        // Revert changes if Escape is pressed
+        li.replaceChild(taskContent, editInput);
+      }
+    });
+  });
+  // --- EDIT LOGIC ENDS HERE ---
+
+  checkbox.addEventListener("change", () => {
+    taskContent.classList.toggle("completed");
     updateTaskCounter();
     saveState();
   });

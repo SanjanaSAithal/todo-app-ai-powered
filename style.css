@@ -185,4 +185,9 @@ button:hover {
   .container {
     padding: 1.5rem;
   }
+
+  #taskList span, #trashList span {
+    flex-grow: 1; /* Helps with text alignment */
+    cursor: pointer;
+  }
 }
