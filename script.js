@@ -1,6 +1,7 @@
 const taskInput = document.getElementById('taskInput');
 const prioritySelect = document.getElementById('prioritySelect');
 const addTaskBtn = document.getElementById('addBtn');
+const dueDateInput = document.getElementById('dueDateInput');
 const taskList = document.getElementById('taskList');
 const filterSelect = document.getElementById("filterSelect");
 const trashList = document.getElementById("trashList");
@@ -9,13 +10,14 @@ const clearTrashBtn = document.getElementById("clearTrashBtn"); // <-- NEW
 addTaskBtn.addEventListener('click', () => {
   const taskText = taskInput.value.trim();
   const priority = prioritySelect.value;
+  const dueDate = dueDateInput.value;
 
   if (taskText === "") {
     alert("Please enter a task!");
     return;
   }
 
-  const li = createTaskElement(taskText, priority, false);
+  const li = createTaskElement(taskText, priority, false, dueDate);
   taskList.insertBefore(li, taskList.firstChild);
 
   taskInput.value = "";
@@ -63,8 +65,9 @@ function saveState() {
   taskList.querySelectorAll("li").forEach((task) => {
     const text = task.querySelector("span").textContent;
     const isCompleted = task.querySelector("span").classList.contains("completed");
-    const priority = task.classList[0]; // Simplified priority fetching
-    tasks.push({ text, isCompleted, priority });
+    const priority = task.classList[0]; 
+    const dueDate = task.dataset.dueDate || "";
+    tasks.push({ text, isCompleted, priority, dueDate });
   });
 
   const trash = [];
@@ -72,7 +75,8 @@ function saveState() {
     const text = task.querySelector("span").textContent;
     const isCompleted = task.querySelector("span").classList.contains("completed");
     const priority = task.classList[0];
-    trash.push({ text, isCompleted, priority });
+    const dueDate = task.dataset.dueDate || "";
+    trash.push({ text, isCompleted, priority, dueDate });
   });
 
   // Save the new object with both arrays
@@ -83,15 +87,15 @@ function loadState() {
   const state = JSON.parse(localStorage.getItem("appState")) || { tasks: [], trash: [] };
 
   // Load active tasks
-  state.tasks.forEach(({ text, isCompleted, priority }) => {
-    const li = createTaskElement(text, priority, isCompleted);
+  state.tasks.forEach(({ text, isCompleted, priority, dueDate }) => {
+    const li = createTaskElement(text, priority, isCompleted, dueDate);
     taskList.appendChild(li);
   });
 
   // Load trashed tasks
-  state.trash.forEach(({ text, isCompleted, priority }) => {
+  state.trash.forEach(({ text, isCompleted, priority, dueDate }) => {
     // We create the element, but then manually move it to trash
-    const li = createTaskElement(text, priority, isCompleted);
+    const li = createTaskElement(text, priority, isCompleted, dueDate);
     
     // Simulate the 'delete' click to move it to trash correctly
     const deleteBtn = li.querySelector(".delete-btn");
@@ -117,7 +121,7 @@ function loadState() {
   updateTaskCounter();
 }
 
-function createTaskElement(text, priority, isCompleted) {
+function createTaskElement(text, priority, isCompleted, dueDate) {
   const li = document.createElement("li");
 
   const checkbox = document.createElement("input");
@@ -127,6 +131,17 @@ function createTaskElement(text, priority, isCompleted) {
   const taskContent = document.createElement("span");
   taskContent.textContent = text;
   taskContent.classList.add(priority);
+
+  const dueDateDisplay = document.createElement("span");
+  dueDateDisplay.classList.add("due-date");
+  if (dueDate) {
+    // Formatting the date to be more readable
+    const date = new Date(dueDate);
+    dueDateDisplay.textContent = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric'
+    });
+  }
 
   if (isCompleted) {
     checkbox.checked = true;
@@ -216,8 +231,14 @@ function createTaskElement(text, priority, isCompleted) {
 
   li.appendChild(checkbox);
   li.appendChild(taskContent);
+  if (dueDate) {
+    li.appendChild(dueDateDisplay);
+  }
   li.appendChild(deleteBtn);
   li.classList.add(priority);
+  if (dueDate) {
+    li.dataset.dueDate = dueDate;
+  }
 
   return li;
 }
@@ -225,6 +246,7 @@ function createTaskElement(text, priority, isCompleted) {
 // 🧹 Clear Trash functionality
 clearTrashBtn.addEventListener("click", () => {
   trashList.innerHTML = "";
+  saveState();
 });
 
 loadState();
