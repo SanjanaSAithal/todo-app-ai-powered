@@ -31,6 +31,7 @@ h1 {
 
 .task-input {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 1.5rem;
 }
@@ -100,6 +101,23 @@ button:hover {
   font-style: italic;
 }
 
+.delayed {
+  color: #ff6347 !important;
+  font-weight: bold;
+}
+
+.due-date {
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.reminder-indicator {
+  font-size: 14px;
+  margin-left: 10px;
+  color: #007BFF;
+}
+
 .delete-btn {
   background: none;
   border: none;
@@ -161,6 +179,7 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   transition: transform 0.2s ease;
+  gap: 10px;
 }
 
 #taskList li:hover,
@@ -174,20 +193,17 @@ button:hover {
     flex-direction: column;
     gap: 10px;
   }
-
   #taskInput,
   #prioritySelect,
   #addBtn,
   #filterSelect {
     width: 100%;
   }
-
   .container {
     padding: 1.5rem;
   }
-
   #taskList span, #trashList span {
-    flex-grow: 1; /* Helps with text alignment */
+    flex-grow: 1;
     cursor: pointer;
   }
 }
